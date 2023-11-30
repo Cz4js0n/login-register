@@ -27,7 +27,7 @@
     {
         $nazwa = $_POST['uzytkownik'];
         $email = $_POST['email'];
-        $haslo = password_hash($_POST['haslo'], PASSWORD_DEFAULT);
+        $haslo = hash('sha256', $_POST['haslo']);
 
         if (!poprawnyEmail($email)) 
         {
@@ -63,7 +63,7 @@
         {
             $uzytkownik = mysqli_fetch_row($result);
 
-            if ($uzytkownik && password_verify($haslo, $uzytkownik[3])) 
+            if ($uzytkownik && hash('sha256', $haslo) === $uzytkownik[3]) 
             {
                 $_SESSION['id_uzytkownika'] = $uzytkownik[0];
                 echo "<p>Zalogowano pomyślnie!</p>";
