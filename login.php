@@ -28,7 +28,6 @@
         $nazwa = $_POST['uzytkownik'];
         $email = $_POST['email'];
         $haslo = hash('sha256', $_POST['haslo']);
-
         if (!poprawnyEmail($email)) 
         {
             echo "<p>Błędny format adresu e-mail.</p>";
@@ -63,7 +62,7 @@
         {
             $uzytkownik = mysqli_fetch_row($result);
 
-            if ($uzytkownik && hash('sha256', $haslo) === $uzytkownik[3]) 
+            if ($uzytkownik && hash('sha256', $haslo) === $uzytkownik[2]) 
             {
                 $_SESSION['id_uzytkownika'] = $uzytkownik[0];
                 echo "<p>Zalogowano pomyślnie!</p>";
